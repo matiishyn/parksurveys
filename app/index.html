@@ -1,25 +1,61 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>gulp</title>
+    <title>Парки Татарстана</title>
 
     <base href="/">
     <meta charset="UTF-8">
 
     <!-- build:css(.tmp) /styles/app.css -->
+    <link rel="stylesheet" href="angular-toastr/dist/angular-toastr.css">
+    <link rel="stylesheet" href="selectize/dist/css/selectize.css"/>
+    <link rel="stylesheet" href="selectize/dist/css/selectize.bootstrap3.css"/>
     <link rel="stylesheet" href="styles/app.css">
     <!-- endbuild -->
+    
+    <script>
+      UPLOADCARE_PUBLIC_KEY = '2c5642caa003e368bd41';
+    </script>
   </head>
-  <body ng-app="gulpbsc">
-    <section ui-view></section>
+  <body ng-app="parksurveys">
+    <section class="content" ui-view></section>
 
     <!-- build:js(bower_components) /scripts/vendor.js -->
+    <script src="firebase/firebase.js"></script>
+    <script src="jquery/dist/jquery.min.js"></script>
+    <script src="selectize/dist/js/standalone/selectize.min.js"></script>
+
     <script src="angular/angular.min.js"></script>
+
+    <script src="angularfire/dist/angularfire.min.js"></script>
     <script src="ui-router/release/angular-ui-router.min.js"></script>
+
+    <script src="angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+
+    <script src="angular-uploadcare/angular-uploadcare.js"></script>
+    <script src="ng-selectize/ng-selectize.js"></script>
+    <script src="ngmap/build/scripts/ng-map.min.js"></script>
+    <script src="quick-ngrepeat/quick-ng-repeat.js"></script>
     <!-- endbuild -->
+
+    <script src="//maps.google.com/maps/api/js"></script>
+    <script src="//ucarecdn.com/widget/2.1.2/uploadcare/uploadcare.min.js"></script>
 
     <!-- build:js(.tmp) /scripts/app.js -->
     <script src="scripts/app.js"></script>
+    <script src="scripts/filters/firebase.js"></script>
+
+    <script src="scripts/controllers/landing.js"></script>
+    <script src="scripts/controllers/parks/id.js"></script>
+    <script src="scripts/controllers/parks/survey.js"></script>
+
+    <script src="scripts/controllers/users/auth.js"></script>
+
+    <script src="scripts/controllers/admin/parks/list.js"></script>
+    <script src="scripts/controllers/admin/parks/edit.js"></script>
+
+    <script src="scripts/controllers/admin/forms/list.js"></script>
+    <script src="scripts/controllers/admin/forms/edit.js"></script>
     <!-- endbuild -->
   </body>
 </html>

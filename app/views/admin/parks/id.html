@@ -1,0 +1,64 @@
+<section ui-view>
+  <div ng-controller="AdminParksEditCtrl as park">
+    <div ng-if="park.fbLoading">
+      loading park
+    </div>
+    <div ng-if="!park.fbLoading">
+      <form class="form-horizontal" ng-submit="park.save()">
+        <div class="form-group">
+          <label for="name" class="col-sm-2 control-label">Название</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="name" ng-model="park.details.name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description" class="col-sm-2 control-label">Описание</label>
+          <div class="col-sm-6">
+            <textarea class="form-control" id="description" ng-model="park.details.description"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description" class="col-sm-2 control-label">Фотография</label>
+          <div class="col-sm-6">
+            <uploadcare-widget
+              data-public-key="2c5642caa003e368bd41"
+              data-locale="en"
+              data-tabs="file url facebook gdrive dropbox"
+              data-images-only="true"
+              data-path-value="true"
+              data-preview-step="false"
+              data-clearable="true"
+              data-multiple="false"
+              data-crop="disabled"
+              on-upload-complete="park.onImageUploadComplete(info)"
+              value="{{ park.details.image }}"
+             />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="address" class="col-sm-2 control-label">Адрес</label>
+          <div class="col-sm-3">
+            <input type="text" class="form-control" id="address" ng-model="park.details.address.lat" placeholder="Широта">
+          </div>
+          <div class="col-sm-3">
+            <input type="text" class="form-control" ng-model="park.details.address.lon" placeholder="Долгота">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Анкета</label>
+          <div class="col-sm-6">
+            <select selectize="park.selectize" options="park.forms" ng-model="park.details.formId"></select>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-3">
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+          </div>
+          <div class="col-sm-3 text-right">
+            <div class="btn btn-danger" ng-click="park.remove()">Удалить парк</div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

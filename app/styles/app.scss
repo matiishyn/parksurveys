@@ -3,3 +3,45 @@
 
 // Our modules
 @import "app/scaffolding";
+
+html,
+body {
+  height: 100%;
+}
+
+.content {
+  height: 100%;
+}
+
+.page-landing {
+  ui-view {
+    display: block;
+    background: #fff;
+    position: relative;
+  }
+}
+
+map.landing-map {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.page-dashboard {
+  padding-bottom: 20rem;
+}
+
+.list-repeat-inline {
+  &:after {
+    content: ", ";
+  }
+
+  &:last-child {
+    &:after {
+      content: "";
+    }
+  }
+}

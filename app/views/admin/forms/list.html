@@ -1,0 +1,29 @@
+<section ui-view>
+  <div ng-controller="AdminFormsListCtrl as forms">
+    <div ng-if="forms.fbLoading">loading forms</div>
+
+    <div ng-if="!forms.fbLoading">
+      <table class="table table-striped table-bordered table-hover" ng-if="forms.list.length">
+        <thead>
+          <th>Название</th>
+          <th>Кол-во вопросов</th>
+        </thead>
+        <tbody>
+          <tr ui-sref="admin.forms.id({ id: form.$id })" quick-ng-repeat="form in forms.list track by $index" quick-repeat-list="forms.qrList">
+            <td>{{form.name}}</td>
+            <td>{{forms.getLength('questions', $index)}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="alert alert-danger" role="alert" ng-if="!forms.list.length">
+        Пока нет ни одной анкеты
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success" ng-click="forms.create()">добавить новую анкету</button>
+        </div>
+      </div>
+    </div>
+</section>

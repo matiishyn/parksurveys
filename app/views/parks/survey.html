@@ -1,0 +1,22 @@
+<ui-view>
+  <section ng-controller="ParkIdSurveyCtrl as form">
+    <section ng-if="form.fbLoading">form loading</section>
+
+    <section ng-if="!form.fbLoading">
+      <div ng-repeat="question in (form.questions | firebaseFilter:form.details.questions) track by $index">
+        <form ng-submit="form.submit(question)">
+          <p>id: {{question.$id}}</p>
+          <p>answers: {{question.answers}}</p>
+        </form>
+      </div>
+    </section>
+  </section>
+</ui-view>
+
+<!-- formId
+
+submit = () =>
+  user.questions.push(question.id, answer.id)
+  user.surveys.push(question.id, answer.id)
+
+survey/form -->

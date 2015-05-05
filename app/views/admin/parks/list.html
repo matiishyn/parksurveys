@@ -1,0 +1,31 @@
+<section ui-view>
+  <div ng-controller="AdminParksListCtrl as parks">
+    <div ng-if="parks.fbLoading">loading parks</div>
+
+    <div ng-if="!parks.fbLoading">
+      <table class="table table-striped table-bordered table-hover" ng-if="parks.list.length">
+        <thead>
+          <th>Название</th>
+          <th>Описание</th>
+          <th>Анкета</th>
+        </thead>
+        <tbody>
+          <tr ui-sref="admin.parks.id({ id: park.$id })" quick-ng-repeat="park in parks.list" quick-repeat-list="parks.qrList">
+            <td>{{park.name}}</td>
+            <td>{{park.description}}</td>
+            <td>{{park.formId}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="alert alert-danger" role="alert" ng-if="!parks.list.length">
+        Пока нет ни одного парка
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success" ng-click="parks.create()">добавить новый парк</button>
+        </div>
+      </div>
+    </div>
+</section>

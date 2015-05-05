@@ -1,0 +1,104 @@
+<div ng-controller="AdminFormsEditCtrl as form">
+  <div ng-if="form.fbLoading">
+    loading form
+  </div>
+  <div ng-if="!form.fbLoading">
+    <form class="form-horizontal" ng-submit="form.save()">
+      <div class="form-group">
+        <label for="parks" class="col-sm-2 control-label">Название анкеты</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" ng-model="form.details.name">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-3">
+          <button type="submit" class="btn btn-primary">Сохранить</button>
+        </div>
+        <div class="col-sm-3 text-right">
+          <div class="btn btn-danger" ng-click="form.remove()">Удалить анкету</div>
+        </div>
+      </div>
+    </form>
+
+    <h4>Вопросы</h4>
+    <form class="form-horizontal panel panel-default" ng-repeat="question in (form.questions | firebaseFilter:form.details.questions) track by $index" ng-submit="form.saveQuestion(question)">
+      <div class="panel-body">
+        <div class="form-group">
+          <label for="question-title" class="col-sm-2 control-label">Заменить вопрос</label>
+          <div class="col-sm-6">
+            <select placeholder="Поиск по всем вопросам" selectize="form.selectize.options" options="form.questions | firebaseFilter:form.details.questions:true" ng-model="form.selectize.selected" ng-change="form.changeQuestion(question)"></select>
+          </div>
+        </div>
+        <hr>
+        <div class="form-group">
+          <label for="question-title" class="col-sm-2 control-label">Заголовок</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" ng-model="question.title">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="name" class="col-sm-2 control-label">Тип вопроса</label>
+          <div class="col-sm-6">
+            <label class="radio-inline">
+              <input type="radio" name="inlineRadioOptions" ng-model="question.type" value="radio"> один выбор
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="inlineRadioOptions" ng-model="question.type" value="checkbox"> несколько
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="inlineRadioOptions" ng-model="question.type" value="input"> поле ввода
+            </label>
+          </div>
+        </div>
+        <div class="form-group" ng-if="question.type != 'input'">
+          <label for="name" class="col-sm-2 control-label">Поле "другое"</label>
+          <div class="col-sm-6">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="question.isCustomAllowed"> да
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" ng-if="question.type != 'input'">
+          <label class="col-sm-2 control-label">Ответы</label>
+          <div class="col-sm-6">
+            <div class="form-group" ng-repeat="answer in question.answers track by $index">
+              <div class="col-xs-12">
+                <div class="input-group">
+                  <input type="text" class="form-control" ng-model="answer.title">
+                  <span class="input-group-btn">
+                    <button class="btn btn-danger" type="button" ng-click="form.deleteAnswer(question, $index)">x</button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-12">
+                <div class="input-group">
+                  <input type="text" class="form-control" id="name" ng-model="form.newAnswer">
+                  <span class="input-group-btn">
+                    <button class="btn btn-success" type="button" ng-disabled="!form.newAnswer" ng-click="form.addNewAnswer(question)">+</button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+          <div class="col-sm-offset-2 col-sm-3">
+            <button type="submit" class="btn btn-primary">сохранить вопрос</button>
+          </div>
+          <div class="col-sm-7 text-right">
+            <div class="btn btn-default" ng-click="form.deleteQuestion('everywhere', question)">удалить вопрос везде</div>
+            <div class="btn btn-danger" ng-click="form.deleteQuestion('form', question, question.localId)">удалить вопрос из анкеты</div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <button class="btn btn-success" ng-click="form.addNewQuestion()">добавить вопрос</button>
+  </div>
+</div>
