@@ -4,11 +4,6 @@ angular.module('parksurveys').controller('AuthCtrl', function($http, $rootScope,
   const ref = $rootScope.dataRef.child('users');
   this.user = {};
 
-  const userSchema = {
-    phone: this.user.phone,
-    role: 'user'
-  };
-
   if($rootScope.authData) {
     this.user.uid = $rootScope.authData.uid;
   }

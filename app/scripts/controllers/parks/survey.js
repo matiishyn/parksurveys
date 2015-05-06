@@ -16,8 +16,8 @@ angular.module('parksurveys').controller('ParkIdSurveyCtrl', function($rootScope
     this.fbLoading = false;
   });
 
-  const submit = (question) => {
-    console.log(question)
+  const submit = () => {
+    console.log(this.details);
   };
 
   this.submit = submit;

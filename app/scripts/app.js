@@ -73,7 +73,7 @@ app.config(($locationProvider, $urlRouterProvider, $stateProvider) => {
   });
 });
 
-app.run(($rootScope, $firebaseAuth, $state) => {
+app.run(($rootScope, $firebaseAuth) => {
   $rootScope.dataRef = new Firebase('https://parksurveys.firebaseio.com/');
   $rootScope.authRef = $firebaseAuth($rootScope.dataRef);
   $rootScope.authData = $rootScope.authRef.$getAuth();

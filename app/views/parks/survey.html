@@ -3,12 +3,28 @@
     <section ng-if="form.fbLoading">form loading</section>
 
     <section ng-if="!form.fbLoading">
-      <div ng-repeat="question in (form.questions | firebaseFilter:form.details.questions) track by $index">
-        <form ng-submit="form.submit(question)">
-          <p>id: {{question.$id}}</p>
-          <p>answers: {{question.answers}}</p>
-        </form>
-      </div>
+      <form ng-submit="form.submit()">
+        <div ng-repeat="question in (form.questions | firebaseFilter:form.details.questions) track by $index">
+          <h2>{{question.title}}</h2>
+
+          <div class="form-group input-group input-group-lg" ng-repeat="(key, value) in question.answers track by $index">
+            <span class="input-group-addon">
+              <input type="radio" ng-model="question.selected" name="answer-{{question.$id}}" id="{{key}}" ng-value="key">
+            </span>
+            <label for="{{key}}" class="form-control-static">{{value.title}}</label>
+          </div>
+
+          <div class="form-group" ng-if="question.isCustomAllowed">
+            <h4>Свой вариант</h4>
+            <textarea rows="2" class="form-control" ng-model="question.selected"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 col-sm-offset-4">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Отправить анкету</button>
+          </div>
+        </div>
+      </form>
     </section>
   </section>
 </ui-view>
