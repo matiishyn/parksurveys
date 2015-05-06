@@ -68,7 +68,7 @@
                 <div class="input-group">
                   <input type="text" class="form-control" ng-model="answer.title">
                   <span class="input-group-btn">
-                    <button class="btn btn-danger" type="button" ng-click="form.deleteAnswer(question, $index)">x</button>
+                    <button class="btn btn-danger" type="button" ng-click="form.deleteAnswer(question, $index)">удалить</button>
                   </span>
                 </div>
               </div>
@@ -78,7 +78,7 @@
                 <div class="input-group">
                   <input type="text" class="form-control" id="name" ng-model="form.newAnswer">
                   <span class="input-group-btn">
-                    <button class="btn btn-success" type="button" ng-disabled="!form.newAnswer" ng-click="form.addNewAnswer(question)">+</button>
+                    <button class="btn btn-success" type="button" ng-disabled="!form.newAnswer" ng-click="form.addNewAnswer(question)">добавить</button>
                   </span>
                 </div>
               </div>
