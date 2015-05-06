@@ -14,7 +14,7 @@ angular.module('parksurveys').controller('AuthCtrl', function($http, $rootScope,
   }
 
   const send = () => {
-    const url = this.user.code ? 'http://localhost:8080/user/verify' : 'http://localhost:8080/user';
+    const url = this.user.code ? 'http://api.park.tatar/user/verify' : 'http://api.park.tatar/user';
 
     $http.post(url, this.user).success((data) => {
       this.status = 'queued';
