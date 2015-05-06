@@ -1,0 +1,14 @@
+{
+  "name": "api-parksurveys",
+  "version": "0.0.3",
+  "author": "Eugene <me@theaqua.im> (http://theaqua.im/)",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.12.3",
+    "body-parser": "^1.12.3",
+    "cors": "^2.6.0",
+    "express": "^4.12.3",
+    "firebase-token-generator": "^2.0.0",
+    "twilio": "^2.1.0"
+  }
+}
