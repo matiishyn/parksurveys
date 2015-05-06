@@ -1,0 +1,51 @@
+<div class="panel panel-default" ng-controller="AuthCtrl as auth">
+  <div class="panel-heading">
+    О парках
+  </div>
+  <div class="panel-body" ng-if="!auth.user.uid">
+    <form ng-submit="auth.send()">
+      <p class="alert alert-danger" ng-show="auth.status == 'error'">
+        {{auth.code}}
+      </p>
+      <div ng-show="auth.status != 'queued' && !auth.user.code">
+        <h5 class="text-center">Давайте знакомиться</h6>
+
+        <div class="form-group" ng-show="auth.status != 'queued' && !auth.user.code">
+          <input type="tel" class="form-control" ng-model="auth.user.phone" placeholder="Ваш номер телефона">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" ng-show="auth.status != 'queued' && !auth.user.code">Получить SMS</button>
+      </div>
+
+      <div ng-show="auth.status == 'queued' || auth.user.code">
+        <h5 class="text-center">Ваш номер телефона</h6>
+        <h3 class="text-center" ng-show="auth.status == 'queued' || auth.user.code">{{auth.user.phone}}</h3>
+        <div class="form-group" ng-show="auth.status == 'queued' || auth.user.code">
+          <input type="text" class="form-control" ng-model="auth.user.code" placeholder="Введите код из SMS" require>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" ng-show="auth.status == 'queued' || auth.user.code">Введите код из SMS</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="panel-body" ng-if="auth.user.uid">
+    <h5 class="text-center">Мои парки</h5>
+
+    <ul class="list-group">
+      <li class="list-group-item text-overflow" ng-repeat="survey in auth.userData.surveys">
+        {{auth.parks[auth.surveys[survey].parkId].name}}
+        <span class="badge">
+          {{(auth.getCount(auth.forms[auth.surveys[survey].formId].questions)) / (auth.getCount(auth.surveys[survey].answers)) * 100 | floor}}%
+        </span>
+      </li>
+    </ul>
+
+    <ul class="list-group">
+      <li class="list-group-item">
+        Мой профиль
+      </li>
+    </ul>
+
+    <p class="text-center" ng-click="auth.logout()">Выйти</p>
+  </div>
+</div>
