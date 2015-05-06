@@ -1,12 +1,24 @@
 'use strict';
 
-angular.module('parksurveys').controller('AuthCtrl', function($http, $rootScope, $firebaseObject) {
-  const ref = $rootScope.dataRef.child('users');
+angular.module('parksurveys').controller('AuthCtrl', function($http, $rootScope, $firebaseObject, $firebaseArray) {
+  const usersRef = $rootScope.dataRef.child('users');
+  const surveysRef = $rootScope.dataRef.child('surveys');
+  const parksRef = $rootScope.dataRef.child('parks');
+  const formsRef = $rootScope.dataRef.child('forms');
+
   this.user = {};
+  this.surveys = $firebaseObject(surveysRef);
+  this.parks = $firebaseObject(parksRef);
+  this.forms = $firebaseObject(formsRef);
 
   if($rootScope.authData) {
     this.user.uid = $rootScope.authData.uid;
+    this.userData = $firebaseObject(usersRef.child(this.user.uid));
   }
+
+  const getCount = (obj) => {
+    return Object.keys(obj).length;
+  };
 
   const send = () => {
     const url = this.user.code ? 'http://api.park.tatar/user/verify' : 'http://api.park.tatar/user';
@@ -21,8 +33,8 @@ angular.module('parksurveys').controller('AuthCtrl', function($http, $rootScope,
 
           this.user.uid = id;
 
-          if(!($firebaseObject(ref.child(id)).phone)) {
-            ref.child(id).set({
+          if(!($firebaseObject(usersRef.child(id)).phone)) {
+            usersRef.child(id).set({
               phone: phone,
               role: 'user'
             });
@@ -42,6 +54,7 @@ angular.module('parksurveys').controller('AuthCtrl', function($http, $rootScope,
     this.user.phone = null;
   };
 
+  this.getCount = getCount;
   this.send = send;
   this.logout = logout;
 });

@@ -29,7 +29,7 @@
               </div>
 
               <div ng-show="auth.status == 'queued' || auth.user.code">
-                <h5 class="text-center" >Ваш номер телефона</h6>
+                <h5 class="text-center">Ваш номер телефона</h6>
                 <h3 class="text-center" ng-show="auth.status == 'queued' || auth.user.code">{{auth.user.phone}}</h3>
                 <div class="form-group" ng-show="auth.status == 'queued' || auth.user.code">
                   <input type="text" class="form-control" ng-model="auth.user.code" placeholder="Введите код из SMS" require>
@@ -43,15 +43,16 @@
             <h5 class="text-center">Мои парки</h5>
 
             <ul class="list-group">
-              <li class="list-group-item">
-                <span class="badge">14</span>
-                Парк победы
+              <li class="list-group-item text-overflow" ng-repeat="survey in auth.userData.surveys">
+                {{auth.parks[auth.surveys[survey].parkId].name}}
+                <span class="badge">
+                  {{(auth.getCount(auth.forms[auth.surveys[survey].formId].questions)) / (auth.getCount(auth.surveys[survey].answers)) * 100 | floor}}%
+                </span>
               </li>
             </ul>
 
             <ul class="list-group">
               <li class="list-group-item">
-                <span class="badge">99%</span>
                 Мой профиль
               </li>
             </ul>

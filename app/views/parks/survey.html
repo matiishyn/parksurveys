@@ -9,14 +9,14 @@
 
           <div class="form-group input-group input-group-lg" ng-repeat="(key, value) in question.answers track by $index">
             <span class="input-group-addon">
-              <input type="radio" ng-model="question.selected" name="answer-{{question.$id}}" id="{{key}}" ng-value="key">
+              <input type="radio" ng-model="form.selected[question.$id]" name="answer-{{question.$id}}" id="{{key}}" ng-value="key">
             </span>
             <label for="{{key}}" class="form-control-static">{{value.title}}</label>
           </div>
 
           <div class="form-group" ng-if="question.isCustomAllowed">
             <h4>Свой вариант</h4>
-            <textarea rows="2" class="form-control" ng-model="question.selected"></textarea>
+            <textarea rows="2" class="form-control" ng-model="form.selected[question.$id]"></textarea>
           </div>
         </div>
         <div class="row">
