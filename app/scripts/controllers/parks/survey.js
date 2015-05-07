@@ -17,10 +17,22 @@ angular.module('parksurveys').controller('ParkIdSurveyCtrl', function($rootScope
   this.details = $firebaseObject(detailsRef);
   this.questions = $firebaseArray(questionsRef);
   this.userAnswers = $firebaseObject(userRef.child('answers'));
+  this.userSurveys = $firebaseArray(userRef.child('surveys'));
 
   this.userAnswers.$loaded(() => {
     this.fbLoading = false;
     this.selected = this.userAnswers;
+  });
+
+  this.userSurveys.$loaded(() => {
+    let filtered = this.userSurveys.filter((item) => {
+      return item.parkId === parkId;
+    });
+
+    if(filtered.length != 0) {
+      this.surveyId = filtered[0].surveyId;
+      console.log(this.surveyId)
+    }
   });
 
   const submit = () => {
@@ -32,15 +44,26 @@ angular.module('parksurveys').controller('ParkIdSurveyCtrl', function($rootScope
     delete selected.$$conf;
     delete selected.$id;
     delete selected.$priority;
+    delete selected.$value;
 
-    const newSurvey = surveysRef.push({
-      formId: formId,
-      parkId: parkId,
-      userId: userId,
-      answers: selected
-    });
+    if(this.surveyId) {
+      surveysRef.child(this.surveyId).set({
+        formId: formId,
+        answers: selected
+      });
 
-    userRef.child('surveys').push(newSurvey.key());
+      // userRef.child('surveys').child().set();
+    } else {
+      const newSurvey = surveysRef.push({
+        formId: formId,
+        answers: selected
+      });
+
+      userRef.child('surveys').push({
+        parkId: parkId,
+        surveyId: newSurvey.key()
+      });
+    }
   };
 
   this.submit = submit;

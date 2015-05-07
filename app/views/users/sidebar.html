@@ -33,9 +33,9 @@
 
     <ul class="list-group">
       <li class="list-group-item text-overflow" ng-repeat="survey in auth.userData.surveys">
-        {{auth.parks[auth.surveys[survey].parkId].name}}
+        {{auth.parks[survey.parkId].name}}
         <span class="badge">
-          {{(auth.getCount(auth.forms[auth.surveys[survey].formId].questions)) / (auth.getCount(auth.surveys[survey].answers)) * 100 | floor}}%
+          {{(auth.getCount(auth.surveys[survey.surveyId].answers)) / (auth.getCount(auth.forms[auth.surveys[survey.surveyId].formId].questions)) * 100 | floor}}%
         </span>
       </li>
     </ul>
