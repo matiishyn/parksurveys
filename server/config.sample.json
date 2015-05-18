@@ -1,0 +1,13 @@
+{
+  "app": {
+    "port": 8080
+  },
+  "twilio": {
+    "sid": null,
+    "token": null,
+    "from": null
+  },
+  "firebase": {
+    "secret": null
+  }
+}
