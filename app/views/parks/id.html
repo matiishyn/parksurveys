@@ -17,6 +17,8 @@
 
           <p>{{park.details.description}}</p>
 
+          {{(park.getCount(park.surveys[park.surveyId].answers) / (park.getCount(park.forms[park.surveys[park.surveyId].formId].questions)) * 100 | floor)}}%
+
           <div class="well">
             <a ui-sref="parks.id.survey({ formId: park.details.formId })" class="btn btn-primary btn-lg btn-block">Пройти опрос</a>
           </div>

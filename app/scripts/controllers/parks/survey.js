@@ -14,6 +14,7 @@ angular.module('parksurveys').controller('ParkIdSurveyCtrl', function($rootScope
   const userRef = usersRef.child(userId);
 
   this.fbLoading = true;
+  this.parkId = parkId;
   this.details = $firebaseObject(detailsRef);
   this.questions = $firebaseArray(questionsRef);
   this.userAnswers = $firebaseObject(userRef.child('answers'));
@@ -29,9 +30,8 @@ angular.module('parksurveys').controller('ParkIdSurveyCtrl', function($rootScope
       return item.parkId === parkId;
     });
 
-    if(filtered.length != 0) {
+    if(filtered.length > 0) {
       this.surveyId = filtered[0].surveyId;
-      console.log(this.surveyId)
     }
   });
 
@@ -51,8 +51,6 @@ angular.module('parksurveys').controller('ParkIdSurveyCtrl', function($rootScope
         formId: formId,
         answers: selected
       });
-
-      // userRef.child('surveys').child().set();
     } else {
       const newSurvey = surveysRef.push({
         formId: formId,
