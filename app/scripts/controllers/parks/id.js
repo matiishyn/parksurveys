@@ -32,8 +32,7 @@ angular.module('parksurveys').controller('ParkIdCtrl', function($rootScope, $sta
       }
     });
 
-    this.progress = (this.getCount(this.surveys[this.surveyId].answers) / (this.getCount(this.forms[this.surveys[this.surveyId].formId].questions) * 100);
-    console.log(this.progress)
+    this.progress = (this.getCount(this.surveys[this.surveyId].answers) / (this.getCount(this.forms[this.surveys[this.surveyId].formId].questions)) * 100);
   };
 
   const getCount = (obj) => {
