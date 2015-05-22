@@ -23,6 +23,7 @@
     "quick-ngrepeat": "*",
     "angular-toastr": "~1.3.0",
     "ngmap": "~1.7.7",
-    "ng-selectize": "*"
+    "ng-selectize": "*",
+    "angular-resource": "~1.3.15"
   }
 }

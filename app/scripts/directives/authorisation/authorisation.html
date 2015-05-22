@@ -1,22 +1,28 @@
 <div class="authorisation">
-    <form ng-if="state === 'authentication'">
+    <form ng-if="state === 'authentication'" name="authWithPhoneForm">
         <div class="form-group">
             <label for="phoneNumber">Давайте знакомиться:</label>
-            <input type="number" class="form-control" id="phoneNumber" placeholder="Ваш номер телефона">
+            <input required type="number" ng-model="model.phoneNumber" class="form-control" id="phoneNumber"
+                   placeholder="Ваш номер телефона">
         </div>
 
-        <button type="submit" class="btn btn-default form-control">Получить SMS</button>
+        <button ng-click="sendPhoneNumber()" ng-disabled="authWithPhoneForm.$invalid" type="submit"
+                class="btn btn-default form-control">Получить SMS
+        </button>
     </form>
 
-    <form ng-if="state === 'authorisation'">
+    <form ng-if="state === 'authorisation'" name="smsCodeForm">
         <div class="form-group">
             <label for="">Ваш номер:</label>
-            <p class="user-phone-number">+7 1234567892</p>
-            <input type="text" class="form-control" id="smsCode" placeholder="Пароль из SMS">
+
+            <p class="user-phone-number">{{model.phoneNumber}}</p>
+            <input type="number" ng-model="model.smsCode" class="form-control" id="smsCode" placeholder="Пароль из SMS">
         </div>
 
-        <button type="submit" class="btn btn-default form-control">Войти</button>
+        <button type="submit" ng-disabled="smsCodeForm.$invalid" class="btn btn-default form-control"
+                ng-click="verifySmsCode()">Войти
+        </button>
 
-        <a href="">Ввести другой номер</a>
+        <a href="" ng-click="goToAuthentication()">Ввести другой номер</a>
     </form>
 </div>

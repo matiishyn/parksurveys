@@ -6,7 +6,7 @@ var fs = require('fs');
 var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
-var twilio = require('twilio')(config.twilio.sid, config.twilio.token);
+//var twilio = require('twilio')(config.twilio.sid, config.twilio.token);
 var fbTGenerator = require('firebase-token-generator');
 
 var app = express();
@@ -28,17 +28,17 @@ if(fs.existsSync(dbFile)) {
   };
 
   fs.writeFileSync(dbFile, JSON.stringify(db))
-};
+}
 
 var generateCode = function() {
   var code = [];
 
   for (var i = 0; i < 4; i++) {
     code.push(Math.floor(Math.random()*11));
-  };
+  }
   
   return code.join('');
-}
+};
 
 var createUser = function(req, res) {
   var phone = req.body.phone;
@@ -46,9 +46,9 @@ var createUser = function(req, res) {
 
   if(db.codes[code]) {
     code = generateCode();
-  };
+  }
 
-  twilio.sendMessage({
+  /*twilio.sendMessage({
     to: '+' + phone,
     from: config.twilio.from,
     body: code + ' — код для О парках'
@@ -63,7 +63,15 @@ var createUser = function(req, res) {
     } else {
       res.status(err.status).json({ message: err.message });
     }
-  });
+  });*/
+  // temp
+  db.codes[code] = 'queued';
+  db.users[phone] = code;
+
+  fs.writeFile(dbFile, JSON.stringify(db));
+
+  res.status(201).json({ status: 'ok', code: code});
+  console.log({ status: 'ok', code: code});
 };
 
 var verifyUser = function(req, res) {
@@ -107,3 +115,4 @@ router.use(function(req, res, next) {
 
 app.use('/', router);
 app.listen(port);
+console.log('Server is working on ', port);

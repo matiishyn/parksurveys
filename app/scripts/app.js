@@ -1,6 +1,6 @@
 'use strict';
 
-const app = angular.module('parksurveys', ['ui.router', 'QuickList', 'firebase', 'toastr', 'ngMap', 'ng-selectize', 'ng-uploadcare']);
+const app = angular.module('parksurveys', ['ui.router', 'QuickList', 'firebase', 'toastr', 'ngMap', 'ngResource', 'ng-selectize', 'ng-uploadcare']);
 
 app.config(($locationProvider, $urlRouterProvider, $stateProvider) => {
     $urlRouterProvider.otherwise('/');
