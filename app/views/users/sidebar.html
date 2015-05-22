@@ -1,6 +1,6 @@
 <div class="panel panel-default" ng-controller="AuthCtrl as auth">
   <div class="panel-heading">
-    О парках
+    О ПАРКАХ
   </div>
   <div class="panel-body" ng-if="!auth.user.uid">
     <form ng-submit="auth.send()">
@@ -8,7 +8,7 @@
         {{auth.code}}
       </p>
       <div ng-show="auth.status != 'queued' && !auth.user.code">
-        <h5 class="text-center">Давайте знакомиться</h6>
+        <h5 class="text-center">Давайте знакомиться</h5>
 
         <div class="form-group" ng-show="auth.status != 'queued' && !auth.user.code">
           <input type="tel" class="form-control" ng-model="auth.user.phone" placeholder="Ваш номер телефона">

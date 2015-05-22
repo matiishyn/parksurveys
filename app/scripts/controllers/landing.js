@@ -1,10 +1,12 @@
 'use strict';
 
-angular.module('parksurveys').controller('LandingCtrl', function($rootScope, $state, $firebaseArray) {
+angular.module('parksurveys').controller('LandingCtrl', function($rootScope, $state, $firebaseArray, gMapsStyle) {
   const ref = $rootScope.dataRef.child('parks');
 
   this.fbLoading = true;
   this.parks = $firebaseArray(ref);
+
+  this.gMapsStyle = gMapsStyle;
 
   this.parks.$loaded(() => {
     this.fbLoading = false;

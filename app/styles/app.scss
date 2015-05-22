@@ -1,6 +1,9 @@
 // Import bootstrap (main + our components)
 @import "bootstrap/bootstrap";
 
+// Import font Lora
+@import url(http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&subset=cyrillic,latin);
+
 // Our modules
 @import "app/scaffolding";
 
@@ -44,4 +47,14 @@ map.landing-map {
       content: "";
     }
   }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-heading;
+  color: $font-color-heading;
+}
+
+// TODO create separate directive for maps
+map {
+  z-index: 0;
 }

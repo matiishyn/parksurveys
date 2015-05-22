@@ -1,11 +1,17 @@
 <ui-view>
-  <section class="page-landing" ng-controller="LandingCtrl as landing" map-lazy-load="http://maps.google.com/maps/api/js">
-    <map class="landing-map" center="55.7558,37.6173" zoom="11" scrollwheel="false">
-      <marker position="[{{park.address.lat}}, {{park.address.lon}}]" ng-repeat="park in landing.parks track by $index" on-click="landing.goToPark({{$index}})"></marker>
-    </map>
+    <section class="page-landing" ng-controller="LandingCtrl as landing"
+             map-lazy-load="http://maps.google.com/maps/api/js">
+        <map styles="{{landing.gMapsStyle}}" class="landing-map" center="55.7558,37.6173" zoom="11" scrollwheel="false">
+            <marker position="[{{park.address.lat}}, {{park.address.lon}}]"
+                    ng-repeat="park in landing.parks track by $index" on-click="landing.goToPark({{$index}})"></marker>
+        </map>
 
-    <div class="container">
-      <div class="col-sm-3" ng-include="'/views/users/sidebar.html'"></div>
-    </div>
-  </section>
+        <div class="container">
+            <div class="row">
+                <panel></panel>
+                <!--div class="col-sm-3" ng-include="'/views/users/sidebar.html'"></div-->
+            </div>
+
+        </div>
+    </section>
 </ui-view>
