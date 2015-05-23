@@ -14,7 +14,7 @@ angular.module('parksurveys').controller('AuthCtrl', function($http, $rootScope,
   if($rootScope.authData) {
     this.user.uid = $rootScope.authData.uid;
     this.userData = $firebaseObject(usersRef.child(this.user.uid));
-  };
+  }
 
   const getCount = (obj) => {
     if(obj) {

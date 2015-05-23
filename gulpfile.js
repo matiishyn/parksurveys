@@ -94,7 +94,7 @@ gulp.task('build', function() {
 gulp.task('ghpages', function() {
   return gulp.src('dist/**/*')
     .pipe(ghPages());
-})
+});
 
 gulp.task('deploy:ghpages', function() {
   sequence(['clean:publish', 'clean:dist'], ['sass', 'scripts', 'assets'], ['templates', 'templates:views'], 'ghpages');
